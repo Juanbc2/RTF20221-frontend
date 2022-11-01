@@ -1,4 +1,22 @@
 .desplegable {
-    border: 1px white solid;
-    visibility: collapse;
+    margin: 10px;  
 }
+
+h2{
+    color:aliceblue;
+
+}
+
+button{
+    margin: 10px;
+    border-radius: 4px;
+    padding: 8px 6px;
+
+}
+
+.forms{
+    display: inline;
+}
+
+
+

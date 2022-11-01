@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import MainPage from "../../main/mainPage";
+import TemplateHeader from "../../template/templateHeader";
 import "./searchPage.css";
+import  API_URL  from "../../../endpoint";
 
 const SearchPage = () => {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8089/api/v1/empleados/listAll")
+    fetch(`${API_URL}/api/v1/empleados/listAll`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); //testing 
+        console.log(data); //testing
         setEmployees(data);
       })
       .catch((err) => {
@@ -18,10 +19,12 @@ const SearchPage = () => {
   }, []);
   return (
     <div>
-      <MainPage />
+      <TemplateHeader />
+      <h2>Lista de Empleados</h2>
       <table>
         <tbody>
           <tr>
+            <th>Cédula</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo Electrónico</th>
@@ -35,6 +38,7 @@ const SearchPage = () => {
           {employees.map((item, index) => {
             return (
               <tr key={`row${index}`}>
+                <td key={`column0item${index}`}>{item.cedula}</td>
                 <td key={`column1item${index}`}>
                   {item.nombre || item.firstName}
                 </td>

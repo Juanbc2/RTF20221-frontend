@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "./addEmployeesPage.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import MainPage from "../../main/mainPage";
+import TemplateHeader from "../../template/templateHeader";
+import API_URL from "../../../endpoint";
 
 const AddEmployeesPage = () => {
   const resetForm = (event) => {
@@ -12,35 +12,52 @@ const AddEmployeesPage = () => {
   };
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data, event) => {
+  const onSubmit = async (data, event) => {
     console.log(data);
-    axios
-      .post("http://localhost:8089/api/v1/empleados/save", data)
-      .then((response) => {
-        console.log(response.data);
-        resetForm(event);
-        alert("Empleado añadido con éxito.");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.data);
-          alert(
-            "Error al añadir empleado, el servidor devuelve un error de tipo: " +
-              error.response.status
-          );
-        } else if (error.request) {
-          alert("Server down.");
+    let guardar = false;
+    await fetch(`${API_URL}/api/v1/empleados/listbycedula/${data.cedula}`)
+      .then((response) => response.json())
+      .then((fetched) => {
+        console.log(fetched); //testing
+        if (fetched.status == 404 || fetched.status == 500) {
+          axios
+            .post(`${API_URL}/api/v1/empleados/save`, data)
+            .then((response) => {
+              console.log(response.data); //testing
+              resetForm(event);
+              alert("Empleado añadido con éxito.");
+            })
+            .catch((error) => {
+              if (error.response) {
+                console.log(error.response.data);
+                alert(
+                  "Error al añadir empleado, el servidor devuelve un error de tipo: " +
+                    error.response.status
+                );
+              } else if (error.request) {
+                alert("Server down.");
+              } else {
+                console.log(error.message);
+              }
+            });
         } else {
-          console.log(error.message);
+          alert("Cédula ya registrada en el sistema.");
         }
+      })
+      .catch((err) => {
+        guardar = true;
+        //console.log(err.message);
       });
   };
 
   return (
     <div>
-      <MainPage />
+      <TemplateHeader />
+      <h2>Añadir empleado nuevo</h2>
       <div className="formContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
+          <label>Cédula</label>
+          <input {...register("cedula")} type="number" />
           <label>Nombre</label>
           <input {...register("nombre")} />
           <label>Apellido</label>
