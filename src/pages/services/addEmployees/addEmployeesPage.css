@@ -1,0 +1,71 @@
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+}
+
+h2{
+    color:rgb(19, 49, 95);;
+    font-size: 35px;
+
+}
+
+.tw{
+
+    width: 80%;
+    font-size: 20px;
+    margin: auto;
+    padding: 5px 20px;
+    color:rgb(19, 49, 95);;
+    background-color: None;
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+.textoOpciones{
+
+    width: 80%;
+    font-size: 16px;
+    margin: auto;
+    color:rgb(46, 42, 42);
+    background-color: None;
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+
+
+.formulariox{
+    width: 500px;
+    height: auto;
+    background: #e9fcfd;
+    margin: auto;
+    margin-top: 15px;
+    box-shadow: 7px 13px 37px #000;
+    padding: 5px 20px;
+    border-radius: 5%;
+}
+
+.cajas{
+    width: 70%;
+    height: 30px;
+    font-size: 16px;
+    color:rgb(41, 39, 39);
+}
+
+.botone{
+    width: 30%;
+    height: 30px;
+    border: groove;
+}
+
+.botone:hover {
+    border: ridge;
+
+}
+
+.botone:active{
+    transform: scale(0.95);
+}
+

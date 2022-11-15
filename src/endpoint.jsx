@@ -1,3 +1,3 @@
-const API_URL = "https://lab520221-backend.herokuapp.com";
+const API_URL = "http://localhost:8089";
 
 export default API_URL;
